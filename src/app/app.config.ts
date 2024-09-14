@@ -8,6 +8,6 @@ import { loggerInterceptor } from './services/Http-interceptors/logger.intercept
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), 
-    provideHttpClient(withInterceptors([headerModifierInterceptor, loggerInterceptor]))
+    provideHttpClient(withInterceptors([headerModifierInterceptor,loggerInterceptor]))
   ]
 };
