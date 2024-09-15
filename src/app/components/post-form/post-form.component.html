@@ -1,0 +1,33 @@
+<div class="parent">
+    <div class="div1"> 
+        <input 
+        type="text" 
+        pInputText
+        placeholder="Post Title" 
+        [(ngModel)]="postData.title" />
+    </div>
+    <div class="div2">
+        <textarea  
+        [(ngModel)]="postData.body"
+        placeholder="Post Content..."
+        pInputTextarea ></textarea>
+    </div>
+    <div class="div3">
+        <p-dropdown 
+        [options]="dataService.users" 
+        [(ngModel)]="postData.userId" 
+        [checkmark]="true" 
+        optionLabel="name" 
+        placeholder="Select a User" />
+        <div>
+            <button 
+                pButton 
+                (click)="publish()"
+                [disabled]="!formValid()"
+                pRipple 
+                label="Publish" 
+                class="p-button-success">
+            </button>
+        </div>
+    </div>
+</div>
