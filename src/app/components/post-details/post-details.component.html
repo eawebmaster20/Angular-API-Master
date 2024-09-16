@@ -1,1 +1,17 @@
-<p>post-details works!</p>
+<div class="flex-it">
+    <div class="title">
+        <h2>{{dataService.selectedPost.title}}</h2>
+        <div class="post-actions">
+            <a href="#">Edit</a>
+            <a (click)="dataService.deleteSelectedPost()">Delete</a>
+        </div>
+    </div>
+    <div class="post-meta">
+        <p>posted by: {{dataService.selectedPost.name}}</p>
+    </div>
+    <div class="post-body">
+        <p>{{dataService.selectedPost.body}}</p>
+    </div>
+</div>
+<p-toast />
+<p-toast position="top-left" key="tl"></p-toast>
