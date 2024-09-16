@@ -21,7 +21,6 @@ export class ListComponent {
     private apiService: ApiService,
     private router:Router
   ){
-    
     dataService.loadPost()
   }
   onScrollDown(){

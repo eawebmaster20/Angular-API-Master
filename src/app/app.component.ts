@@ -14,6 +14,5 @@ import { DataService } from './shared/services/data/data.service';
 export class AppComponent {
   title = 'angularApiMaster';
   constructor(private dataService: DataService){
-    dataService.loadPost()
   }
 }
