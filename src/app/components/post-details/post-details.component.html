@@ -6,9 +6,17 @@
 <div class="flex-it">
     <div class="title">
         <h2>{{dataService.selectedPost.title}}</h2>
-        <div class="post-actions">
-            <a [routerLink]="['/update', dataService.selectedPost.id]">Edit</a>
-            <a (click)="dataService.deleteSelectedPost()">Delete</a>
+        <div class="post-actions">            
+            <p-button 
+            [routerLink]="['/update', dataService.selectedPost.id]"
+                type="button" 
+                label="delete" 
+                severity="primary" />
+            <p-button 
+                type="button" 
+                (onClick)="deleteIt()" 
+                label="Edit" 
+                severity="danger" />
         </div>
     </div>
     <div class="post-meta">
@@ -33,5 +41,3 @@
     }
 </div>
 <p-toast />
-<p-toast position="top-left" key="tl"></p-toast>
-</div>

@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DataService } from '../../shared/services/data/data.service';
 import { ToastModule } from 'primeng/toast';
-import {MessageService} from 'primeng/api';
+import {MessageService, PrimeNGConfig} from 'primeng/api';
 import { ApiService } from '../../shared/services/api/api.service';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-post-details',
   standalone: true,
-  imports: [ToastModule, RouterLink, CommonModule],
+  imports: [ToastModule, RouterLink, CommonModule,ButtonModule],
   providers: [MessageService],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss'
@@ -21,9 +22,11 @@ constructor(
   private route: ActivatedRoute, 
   public dataService: DataService,
   public apiService: ApiService,
-  private messageService: MessageService
+  private messageService: MessageService,
+  private primengConfig: PrimeNGConfig
 ){}
   ngOnInit(): void {
+    this.primengConfig.ripple = true;
     if (localStorage.getItem('selectedPost') !==null) {
       this.dataService.selectedPost = JSON.parse(localStorage.getItem('selectedPost')!)
       this.apiService.getPostComments(`${this.dataService.selectedPost.id}`).subscribe(
@@ -47,5 +50,9 @@ constructor(
       });
     }
     
+  }
+  deleteIt(){
+    this.dataService.deleteSelectedPost()
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
   }
 }
