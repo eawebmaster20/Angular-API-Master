@@ -15,10 +15,20 @@ export class DataService {
   selectedPost: Partial<IDisplayedPost>={ }
   constructor(private apiService: ApiService, private router:Router) { }
   loadPost(){
-   if (this.users.length>0) {
-    return;
-   }
-   this.apiService.getPosts(this.count).subscribe(data =>this.posts=[...this.posts, ...data])
+  //  if (JSON.parse(localStorage.getItem('posts')!).length>0) {
+  //   return;
+  //  }
+   this.apiService.getPosts(this.count)
+   .subscribe(data =>{
+    if (localStorage.getItem('posts')) {
+      this.posts=[...JSON.parse(localStorage.getItem('posts')!), ...data]
+      localStorage.setItem('posts', JSON.stringify(this.posts));
+    }
+    else {
+      localStorage.setItem('posts', JSON.stringify(data));
+      this.posts=data;
+    }
+  })
   }
 
   loadSelectedPost(id:number){

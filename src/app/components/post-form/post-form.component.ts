@@ -36,10 +36,17 @@ export class PostFormComponent implements OnInit,OnDestroy {
       this.apiService.createPost(
         {...this.postData, userId: this.selectedUser.id}
       ).subscribe(
-        res=>{
-          console.log(res)
-          this.router.navigate(['/home'])
-      })
+        {
+          next: res=>{
+            console.log(res)
+            let store = JSON.parse(localStorage.getItem('posts')!);
+            store.push(res)
+            localStorage.setItem('posts', JSON.stringify(store))
+            this.router.navigate(['/home'])
+          },
+          error:err=>console.error(err)
+        }
+    )
     }
     else{
       this.apiService.updatePost(
@@ -57,10 +64,14 @@ export class PostFormComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(){
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-      this.postData = this.dataService.selectedPost;
-      this.btnLabel = 'update'
+    this.routeSubscription = this.route.paramMap.subscribe(params => {
+      if (params.get('id')) {
+        this.id = params.get('id');
+        this.postData = this.dataService.selectedPost;
+        this.btnLabel = 'update'
+        return;
+      }
+      this.btnLabel = 'Publish'
       console.log(this.id); 
     });
   }

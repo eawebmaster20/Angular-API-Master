@@ -26,7 +26,11 @@ export class ListComponent {
     this.dataService.count++;
     this.dataService.count <10 ? this.dataService.loadPost(): '';
   }
-
+  createNewPost(){
+    localStorage.removeItem('selectedPost');
+    this.dataService.selectedPost = {}
+    this.router.navigate(['/post-form']);
+  }
   readMore(post:IPost){
     localStorage.setItem('selectedPost', JSON.stringify(post));
     this.router.navigate(['/post/' + post.id]);
