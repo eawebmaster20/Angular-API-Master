@@ -2,7 +2,7 @@
     <div class="title">
         <h2>{{dataService.selectedPost.title}}</h2>
         <div class="post-actions">
-            <a href="#">Edit</a>
+            <a [routerLink]="['/update', dataService.selectedPost.id]">Edit</a>
             <a (click)="dataService.deleteSelectedPost()">Delete</a>
         </div>
     </div>
@@ -12,6 +12,19 @@
     <div class="post-body">
         <p>{{dataService.selectedPost.body}}</p>
     </div>
+</div>
+<div class="comments">
+    @for(comment of comments; track comment){
+        <div class="comment">
+            <div class="comment-meta">
+                <p>Comment: {{comment.name}}</p>
+                <p>{{comment.email}}</p>
+            </div>
+            <div class="comment-body">
+                <p>{{comment.body}}</p>
+            </div>
+        </div>
+    }
 </div>
 <p-toast />
 <p-toast position="top-left" key="tl"></p-toast>
