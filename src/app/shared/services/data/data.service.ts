@@ -14,10 +14,11 @@ export class DataService {
   count:number =1;
   selectedPost: Partial<IDisplayedPost>={ }
   constructor(private apiService: ApiService, private router:Router) { }
-  loadPost(){
-  //  if (JSON.parse(localStorage.getItem('posts')!).length>0) {
-  //   return;
-  //  }
+  loadPost(fetch?:boolean){
+   if (localStorage.getItem('posts')&& !fetch) {
+     this.posts=[...JSON.parse(localStorage.getItem('posts')!)]
+    return;
+   }
    this.apiService.getPosts(this.count)
    .subscribe(data =>{
     if (localStorage.getItem('posts')) {

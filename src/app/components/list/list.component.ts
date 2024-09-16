@@ -20,11 +20,10 @@ export class ListComponent {
     private apiService: ApiService,
     private router:Router
   ){
-    dataService.loadPost()
   }
   onScrollDown(){
     this.dataService.count++;
-    this.dataService.count <10 ? this.dataService.loadPost(): '';
+    this.dataService.count <10 ? this.dataService.loadPost(true): '';
   }
   createNewPost(){
     localStorage.removeItem('selectedPost');
