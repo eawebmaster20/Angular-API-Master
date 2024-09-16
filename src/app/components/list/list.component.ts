@@ -6,11 +6,12 @@ import { Router, RouterLink } from '@angular/router';
 import { IPost } from '../../shared/interfaces/post';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SkeletonModule } from 'primeng/skeleton';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [AsyncPipe,InfiniteScrollModule, SkeletonModule],
+  imports: [AsyncPipe,ButtonModule,InfiniteScrollModule, SkeletonModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })

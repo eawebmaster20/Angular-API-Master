@@ -1,8 +1,9 @@
 <div class="detail-component-parent">
-    <button [routerLink]="['/home']" class="btn-basic mb-3">
+    <!-- <button [routerLink]="['/home']" class="btn-basic mb-3">
         <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
         Go back
-    </button>
+    </button> -->
+    <p-button [routerLink]="['/home']" severity="secondary" [rounded]="true" label="Go back" />
 <div class="flex-it">
     <div class="title">
         <h2>{{dataService.selectedPost.title}}</h2>
@@ -10,12 +11,14 @@
             <p-button 
             [routerLink]="['/update', dataService.selectedPost.id]"
                 type="button" 
-                label="delete" 
+                label="Edit" 
+                icon="pi pi-pencil"
                 severity="primary" />
             <p-button 
                 type="button" 
+                icon="pi pi-trash"
                 (onClick)="deleteIt()" 
-                label="Edit" 
+                label="Delete" 
                 severity="danger" />
         </div>
     </div>

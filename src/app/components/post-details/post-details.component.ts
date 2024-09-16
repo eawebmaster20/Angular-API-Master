@@ -44,7 +44,7 @@ constructor(
           this.id = params.get('id');
           console.log(this.id);
           this.dataService.loadSelectedPost(Number(this.id))
-          this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
+          this.messageService.add({severity:'success', summary: 'Success', detail: 'Post deleted successfully'});
         },
         error: err => console.error('Error', err)
       });

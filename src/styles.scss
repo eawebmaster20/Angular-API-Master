@@ -2,6 +2,8 @@
 @use "primeng/resources/primeng.css";
 @use "primeicons/primeicons.css";
 
+$textSucess:green;
+$textDanger: red;
 .btn-basic{
   background-color: gainsboro;
   width: 100px;
@@ -11,8 +13,6 @@
   box-shadow: 1px 2px 5px green;
 }
 
-$textSucess:green;
-$textDanger: red;
 body {
   margin: 0;
   height: 100vh;

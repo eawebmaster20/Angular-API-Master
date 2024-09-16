@@ -3,10 +3,13 @@
      [infiniteScrollUpDistance]="1.5" 
      [infiniteScrollThrottle]="150" 
      (scrolled)="onScrollDown()">
-      <button (click)="createNewPost()" class="btn-basic m-4 mb-3 d-flex align-items-center gap-2 p-1">
-        <i class="pi pi-plus"></i>
-        <span>Add new</span>
-      </button>
+      <p-button 
+          (click)="createNewPost()"
+          type="button" 
+          class="m-4 mb-3"
+          label="Create New" 
+          icon="pi pi-plus"
+          severity="primary" />
     @for (post of dataService.posts; track $index) {
       <div class="border-round border-1 surface-border p-4 surface-card">
         <div class="flex mb-3">
