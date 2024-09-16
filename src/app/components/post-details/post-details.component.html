@@ -1,4 +1,8 @@
-<button [routerLink]="['/home']" class="back">Go back</button>
+<div class="detail-component-parent">
+    <button [routerLink]="['/home']" class="btn-basic mb-3">
+        <i class="pi pi-arrow-left" style="font-size: 1rem"></i>
+        Go back
+    </button>
 <div class="flex-it">
     <div class="title">
         <h2>{{dataService.selectedPost.title}}</h2>
@@ -15,6 +19,7 @@
     </div>
 </div>
 <div class="comments">
+    <h4 class="comment-title">Comments :</h4>
     @for(comment of comments; track comment){
         <div class="comment">
             <div class="comment-meta">
@@ -29,3 +34,4 @@
 </div>
 <p-toast />
 <p-toast position="top-left" key="tl"></p-toast>
+</div>
