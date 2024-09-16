@@ -13,21 +13,15 @@
         pInputTextarea ></textarea>
     </div>
     <div class="div3">
-        <p-dropdown 
-        [options]="dataService.users" 
-        [(ngModel)]="postData.userId" 
-        [checkmark]="true" 
-        optionLabel="name" 
-        placeholder="Select a User" />
         <div>
-            <button 
-                pButton 
+            <p-button 
+                type="button" 
+                [label]="btnLabel"  
                 (click)="publish()"
+                pRipple
                 [disabled]="!formValid()"
-                pRipple 
-                [label]="btnLabel" 
-                class="p-button-success action-btn">
-            </button>
+                severity="danger" />
         </div>
     </div>
 </div>
+<p-toast />

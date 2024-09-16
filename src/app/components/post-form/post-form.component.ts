@@ -10,11 +10,14 @@ import { IUser } from '../../shared/interfaces/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPost } from '../../shared/interfaces/post';
 import { Subscription } from 'rxjs';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-post-form',
   standalone: true,
-  imports: [InputTextModule, InputTextareaModule, FormsModule, DropdownModule, ButtonModule],
+  providers: [MessageService],
+  imports: [ToastModule, InputTextModule, InputTextareaModule, FormsModule, DropdownModule, ButtonModule],
   templateUrl: './post-form.component.html',
   styleUrl: './post-form.component.scss'
 })
@@ -25,11 +28,14 @@ export class PostFormComponent implements OnInit,OnDestroy {
   btnLabel =  'Publish'
   routeSubscription!:Subscription
   constructor(
+    private primengConfig: PrimeNGConfig,
     public dataService: DataService, 
     private apiService: ApiService,
     private router: Router,
+    private messageService: MessageService,
     private route: ActivatedRoute
-  ){}
+  ){
+  }
 
   publish(){
     if (this.btnLabel === 'Publish') {
@@ -39,16 +45,24 @@ export class PostFormComponent implements OnInit,OnDestroy {
         {
           next: res=>{
             console.log(res)
+            this.messageService.add({severity:'success', summary: 'Success', detail: 'Posts created successfully'});
             let store = JSON.parse(localStorage.getItem('posts')!);
             store.push(res)
             localStorage.setItem('posts', JSON.stringify(store))
-            this.router.navigate(['/home'])
+            this.router.navigate(['/new'])
           },
           error:err=>console.error(err)
         }
-    )
+      )
     }
     else{
+      let posts = JSON.parse(localStorage.getItem('posts')!)
+      const index = posts.findIndex((item:IPost) => item.id === this.postData.id);
+        if (index !== -1) {
+          posts[index] = this.postData; 
+          localStorage.setItem('posts', JSON.stringify(posts))
+        }
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'Post updated successfully'});
       this.apiService.updatePost(
         this.postData.id! ,{...this.postData, userId: this.selectedUser.id}
       ).subscribe(
@@ -64,6 +78,7 @@ export class PostFormComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(){
+    this.primengConfig.ripple = true;
     this.routeSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('id')) {
         this.id = params.get('id');
