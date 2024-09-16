@@ -15,13 +15,18 @@ export class ApiService {
   getUsers(){
     return this.http.get<IUser[]>(`${environment.BASE_API}/users`);
   }
-
-  getPosts(){
-    return this.http.get<IPost[]>(`${environment.BASE_API}/posts`, {
-      params: { _page: 1, _limit: 10 }
+  getUser(id:number){
+    return this.http.get<IUser[]>(`${environment.BASE_API}/users?postId=${id}`);
+  }
+  getPosts(count:number){
+    return this.http.get<IPost[]>(`${environment.BASE_API}/posts`
+      , {
+      params: { _page: count, _limit: 10 }
     });
   }
-  
+  getPost(id:number){
+    return this.http.get<IPost[]>(`${environment.BASE_API}/posts/${id}`);
+  }
   getPostComments(postId:string): Observable<any>{
     return this.http.get(`${environment.BASE_API}/comments?postId=${postId}`);
   }
