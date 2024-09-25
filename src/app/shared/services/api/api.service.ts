@@ -43,4 +43,7 @@ export class ApiService {
     return this.http.delete(`${environment.BASE_API}/posts/${postId}`);
   }
 
+  keepServerActive(){
+    return this.http.get(`https://entertainment-web-app-backend-2.onrender.com/api/movies`)
+  }
 }
